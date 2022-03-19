@@ -8,7 +8,9 @@ import java.util.Arrays;
 public class DetectSystem {
     public static void main(String[] args) {
         listAllMixers();
+        System.out.println();
         listAllLines();
+        System.out.println();
         Mixer.Info headset = getMixer("Headset Earphone");
         System.out.println(headset);
     }
@@ -17,7 +19,12 @@ public class DetectSystem {
         System.out.println("DETECTING MIXERS");
         Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
         for (Mixer.Info mixerInfo : mixerInfos) {
-            System.out.println(mixerInfo);
+            System.out.println(";IXERINFO: " + mixerInfo);
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            Line.Info[] lines = mixer.getSourceLineInfo();
+            for (Line.Info line : lines) {
+                System.out.println("LINEINFO:" + line);
+            }
         }
     }
 
